@@ -1,0 +1,77 @@
+/*div{
+	background-color: red;
+}*/
+/*.jumbotron {
+	background-color: red;
+	color: white;
+}*/
+
+.modulo {
+	background-color: rgba(0, 0, 0, 0.2);
+	margin-top: 20px;
+}
+
+#tudo {
+	margin-top: 50px;
+}
+.padding-5 {
+	padding: 5%;
+}
+
+.sem-margin {
+	margin: 0%;
+}
+
+.margin-h4 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.modal-dialog, .modal-content {
+	width: 100%;
+	padding: 0px;
+	margin: auto;
+}
+
+.modal-dialog {
+	width: 50%;
+}
+.modal-body,.modal, .fade {
+	width: 100%;
+	/*padding: 0px;*/
+	margin: auto;
+}
+
+.close {
+	color: #ff0000;
+	opacity: 1;
+	font-size: 30px;
+}
+
+.close:hover {
+	color: #ff0000;
+	opacity: 0.6;
+	font-size: 30px;
+}
+
+#alert {
+	margin-top: -30px;
+}
+
+h2 {
+	color: #1f8fc1;
+	-webkit-overflow-scrolling: touch;
+}
+
+img:hover, h2:hover,a:hover {
+	text-decoration: none;
+	color: #23527c;
+}
+.description {
+	width: 95%;
+}
+
+.jumbotron {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

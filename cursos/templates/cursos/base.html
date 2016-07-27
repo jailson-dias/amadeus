@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	{% block titulo %}
+	<title>Cursos</title>
+	{% endblock%}
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/jailson.css' %}">
+	<script type="text/javascript" src="{% static 'jquery/jquery-1.12.4.js' %}"></script>
+	<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		 <div class="container">
+			 <div class="navbar-header">
+				 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					 <span class="sr-only">Toggle navigation</span>
+					 <span class="icon-bar"></span>
+					 <span class="icon-bar"></span>
+					 <span class="icon-bar"></span>
+				 </button>
+				 <a class="navbar-brand" href="{% url 'cursos:index' %}">Home</a>
+			 </div>
+
+			 <div id="navbar" class="collapse navbar-collapse">
+				 <ul class="nav navbar-nav nav-pills">
+					<li role="presentation" class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+				      Criar <span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu">
+								<li><a href="{% url 'criar:categoria'%}">Categoria</a></li>
+								<li><a href="{% url 'criar:curso'%}">Curso</a></li>
+								<li><a href="{% url 'criar:aluno'%}">Aluno</a></li>
+								<li><a href="{% url 'criar:modulo'%}">Modulo</a></li>
+								<li><a href="{% url 'criar:add_aluno'%}">Add Aluno</a></li>
+								<li><a href="{% url 'criar:add_material'%}">Add Material</a></li>
+								<li><a href="{% url 'criar:add_atividade'%}">Add Atividade</a></li>
+				    </ul>
+				  </li>
+					<li role="presentation" class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+				      Categorias <span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu">
+							{% for categoria in categorias_cp %}
+								<li><a href="{% url 'cursos:categoria' categoria.slug%}">{{categoria}}</a></li>
+							{% endfor %}
+				    </ul>
+				  </li>
+					<li role="presentation" class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+				      Alunos <span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu">
+							{% for aluno in alunos_cp %}
+								<li><a href="{% url 'cursos:aluno' aluno.slug%}">{{aluno}}</a></li>
+							{% endfor %}
+				    </ul>
+				  </li>
+					<li role="presentation" class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+				      Cursos <span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu">
+							{% for curso in cursos_cp %}
+								<li><a href="{% url 'cursos:curso' curso.slug%} ">{{curso}}
+									{% if not curso.is_approved %}
+									   -- x --
+									{% endif %}
+								</a></li>
+							{% endfor %}
+				    </ul>
+				  </li>
+				</ul>
+
+			 </div><!--/.nav-collapse -->
+		 </div>
+	 </nav>
+
+	<div class="jumbotron" id="tudo">
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="jumbotron">
+					{% block conteudo%}
+					{% for curso in cursos%}
+					<div class="row sem-margin">
+						<div class="col-md-3" data-toggle="modal" data-target="#text">
+							{% if curso.imagem %}
+							<a href="{% url 'cursos:curso' curso.slug%}"><img class="img-responsive padding-5" src="{{ curso.imagem.url}}" alt="foto do curso"></img></a>
+							{% else %}
+							<a href="{% url 'cursos:curso' curso.slug%}"><img class="img-responsive padding-5" src="{% static 'imagens/foto.png'%}" alt="foto do curso"></img></a>
+							{% endif %}
+						</div>
+						<div class="col-md-9">
+							<div class="row sem-margin">
+								<div class="row sem-margin">
+									<div class="col-md-12">
+										<a href="{% url 'cursos:curso' curso.slug %}"><h2 class="sem-margin"  data-toggle="modal" data-target="#text">{{curso.curso}}</h2></a>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+											<p class="col-md-12 h4 text-justify"> {{curso.descricao}} <a href="{% url 'cursos:curso' curso.slug %}" >Learn more</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					{% endblock %}
+				</div>
+
+				<!-- <div class="modal fade" id="text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-body">
+								<div class="row sem-margin">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								</div>
+								<div class="row">
+									<h2 class="col-md-12 text-justify sem-margin">{{curso.curso}}</h2>
+								</div>
+								<hr>
+								<div class="row">
+									<h3 class="col-md-12 text-justify sem-margin">Instrutor: {{curso.professor}}</h3>
+								</div>
+								<div class="row">
+									<h4 class="col-md-12 text-justify">Inicio: {{curso.data_inicio|date:'d/m/y'|default:'não definida'}}</h4>
+								</div>
+								<div class="row">
+									<h4 class="col-md-12 text-justify sem-margin">Término: {{curso.data_fim}}</h4>
+								</div>
+
+								<div class="row margin-h4">
+									<p class="col-md-12 text-justify">{{curso.descricao}}</p>
+								</div>
+								<div class="row sem-margin">
+				      				<button type="button" class="h2 btn btn-primary pull-right" data-dismiss="modal">Close</button>
+				      			</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<!-- <div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="jumbotron">
+					<div class="row sem-margin">
+						<div class="col-md-3" data-toggle="modal" data-target="#text">
+							<a href="#"><img class="img-responsive padding-5" src="static/foto.png" alt="foto do curso"></img></a>
+						</div>
+						<div class="col-md-9">
+							<div class="row sem-margin">
+								<div class="row sem-margin">
+									<div class="col-md-12">
+										<a href="#"><h2 class="sem-margin" data-toggle="modal" data-target="#text">Django</h2></a>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<p class="col-md-12 h4 text-justify"> ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <a href="#"  data-toggle="modal" data-target="#text">Learn more</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal fade" id="text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-body">
+								<div class="row sem-margin">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								</div>
+								<div class="row">
+									<h2 class="col-md-12 text-justify sem-margin">Django</h2>
+								</div>
+								<hr>
+								<div class="row">
+									<h3 class="col-md-12 text-justify sem-margin">Instrutor: Jailson Dias</h3>
+								</div>
+								<div class="row">
+									<h4 class="col-md-12 text-justify">Inicio: 18 de julho de 2016</h4>
+								</div>
+								<div class="row">
+									<h4 class="col-md-12 text-justify sem-margin">Término: 30 de julho de 2016</h4>
+								</div>
+
+								<div class="row margin-h4">
+									<p class="col-md-12 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+									quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+									consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+									cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+									proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								</div>
+								<div class="row sem-margin">
+				      				<button type="button" class="h2 btn btn-primary pull-right" data-dismiss="modal">Close</button>
+				      			</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends "cursos/base.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<title>{{categoria}}</title>
+{% endblock titulo %}
+{% block conteudo %}
+<h2>{{categoria}}</h2>
+  {% for curso in cursos%}
+  <div class="row sem-margin">
+    <div class="col-md-3" data-toggle="modal" data-target="#text">
+    		{% if curso.imagem %}
+    		<a href="{% url 'cursos:curso' curso.slug%}"><img class="img-responsive padding-5" src="{{ curso.imagem.url}}" alt="foto do curso"></img></a>
+    		{% else %}
+    		<a href="{% url 'cursos:curso' curso.slug%}"><img class="img-responsive padding-5" src="{% static 'imagens/foto.png'%}" alt="sem foto" /></a>
+    		{% endif %}
+
+    </div>
+    <div class="col-md-9">
+      <div class="row sem-margin">
+        <div class="row sem-margin">
+          <div class="col-md-12">
+            <a href="{% url 'cursos:curso' curso.slug %}"><h2 class="sem-margin"  data-toggle="modal" data-target="#text">{{curso.curso}}</h2></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+              <p class="col-md-12 h4 text-justify"> {{curso.descricao}} <a href="{% url 'cursos:curso' curso.slug %}" >Learn more</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock conteudo %}

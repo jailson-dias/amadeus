@@ -1,0 +1,139 @@
+
+{% extends "cursos/base.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block titulo %}
+<title>{{curso.curso}}</title>
+{% endblock%}
+
+{% block conteudo%}
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h1>{{curso}}</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<!--{# imagem do curso#}-->
+		{% if curso.imagem %}
+		<img class="img-responsive" src="{{curso.imagem.url}}" alt="imagem do curso" />
+		{% else %}
+		<img class="img-responsive" src="{% static 'imagens/foto.png'%}" alt="sem foto" />
+		{% endif %}
+
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<p>
+			{{curso.descricao|linebreaks}}
+		</p>
+	</div>
+</div>
+
+	{# modulos do curso#}
+	{% for modulo in curso.modulos.all %}
+	{% if modulo.is_visivel %}
+		<div class="row modulo">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-8">
+						<h4>{{modulo}}</h4>
+					</div>
+					<div class="col-md-4">
+						<h4></h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<p>{{modulo.descricao|linebreaks}}</p>
+					</div>
+				</div>
+					<div class="row">
+						<div class="col-md-6">
+							{% for material in modulo.materiais.all %}
+								<div class="row">
+									<div class="col-md-12">
+										<h4>{{material}}: {{material.tipo}}</h4>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+						<div class="col-md-6">
+							{% for atividade in modulo.atividades.all %}
+								<div class="row">
+									<div class="col-md-12">
+										<h4>{{atividade}}: {{atividade.tipo}}</h4>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+			</div>
+		</div>
+{% endif %}
+{% endfor %}
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h3>Categoria: <a href="{% url 'cursos:categoria' curso.categoria.slug %}">{{curso.categoria}}</a></h3>
+	</div>
+</div>
+<!-- Input de visivel ou invisivel para o curso-->
+<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{% for field in update %}
+		<div class="form-group{% if field.errors %} has-error{% endif %}">
+				<label for="{{ field.auto_id }}" class="col-sm-2 control-label">{{ field.label }}</label>
+				<div class="col-sm-10">
+					{% render_field field class='form-control' %}
+					{% for error in field.errors %}
+					<span class="help-block">{{ error }}</span>
+					{% endfor %}
+				</div>
+		</div>
+	{% endfor %}
+	<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Atualizar</button>
+			</div>
+	</div>
+</form>
+<!--{# alunos do curso#}-->
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<h1>Alunos</h1>
+	</div>
+</div>
+{% for aluno in curso.alunos.all %}
+<div class="row margin-h4">
+	<div class="col-md-3">
+		<a href="{% url 'cursos:aluno' aluno.slug%}">
+		{% if aluno.imagem %}
+		<img class="img-responsive" src="{{aluno.imagem.url}}" alt="foto de {{aluno.nome}}" />
+		{% else %}
+		<img class="img-responsive" src="{% static 'imagens/foto.png'%}" alt="sem foto" />
+		{% endif %}
+		</a>
+	</div>
+	<div class="col-md-9">
+		<div class="row">
+				<div class="col-md-12">
+					<a href="{% url 'cursos:aluno' aluno.slug%}"><h2>{{aluno.nome}}</h2></a>
+				</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h4>E-mail:{{aluno.email}}</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h4>Telefone:{{aluno.telefone}}</h4>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor%}
+{% endblock %}

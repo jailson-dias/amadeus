@@ -1,0 +1,30 @@
+{% extends "cursos/base.html" %}
+{% load widget_tweaks %}
+{% block titulo %}
+<title>Criar Modulos</title>
+{% endblock titulo %}
+{% block conteudo %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <form class="form-horizontal" action="" method="post">
+          {% csrf_token %}
+          {% for field in modulo %}
+          <div class="form-group{% if field.errors %} has-error{% endif %}">
+              <label for="{{ field.auto_id }}" class="col-sm-2 control-label">{{ field.label_tag }}</label>
+              <div class="col-sm-10">
+                {% render_field field class='form-control' %}
+                {% for error in field.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+              </div>
+          </div>
+          {% endfor %}
+          <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>
+{% endblock conteudo %}

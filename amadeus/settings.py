@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'cursos',
     'formularios',
     'autoslug',
+    'contas',
 
-    'widget_tweaks'
+    'widget_tweaks',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -134,3 +135,13 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+
+
+LOGIN_REDIRECT_URL = 'usuarios:editar'
+LOGIN_URL = 'login'
+AUTH_USER_MODEL = 'contas.User'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'contas.backends.ModelBackend',
+]

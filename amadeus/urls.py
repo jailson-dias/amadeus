@@ -21,5 +21,6 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^criar/',include('formularios.urls',namespace='criar')),
+    url(r'^usuarios/',include('contas.urls',namespace='usuarios')),
     url(r'^',include('cursos.urls',namespace='cursos')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

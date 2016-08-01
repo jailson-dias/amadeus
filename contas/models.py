@@ -2,7 +2,8 @@ import re
 
 from django.db import models
 from django.core import validators
-from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
+from django.contrib.auth.models import UserManager, PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -23,7 +24,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     cpf = models.CharField('CPF', max_length=100, blank=True)
     cidade = models.CharField('Cidade', max_length=100, blank=True)
     ESTADOS = (
-    	("0","Selecione o Estado"),
 		("1","Acre"),
 		("2","Alagoas"),
 		("3","Amazonas"),
@@ -54,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     	)
     estado = models.CharField('Estado', choices=ESTADOS,max_length=100)
     telefone = models.CharField('Telefone', max_length=100, blank=True)
-    is_admin = models.BooleanField('Admin', default=False)
+    is_staff = models.BooleanField('Admin', default=False)
     is_professor = models.BooleanField('Professor', default=False)
     data_entrou = models.DateTimeField('Data de Entrada', auto_now_add=True)
     data_atualizou = models.DateTimeField('Data de Última Atualização', auto_now=True)
@@ -73,3 +73,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return str(self)
+
+    def get_short_name(self):
+        return str(self.name.split(" "))

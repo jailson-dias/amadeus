@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
+from contas.views import csrf_failure
 
 urlpatterns = [
+    url(r'^login/$', auth_views.login, {'template_name': 'contas/login.html'},name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': 'cursos:index'}, name='logout'),
+    url(r'^403/$', csrf_failure , name='error403'),
     url(r'^admin/', admin.site.urls),
     url(r'^criar/',include('formularios.urls',namespace='criar')),
     url(r'^usuarios/',include('contas.urls',namespace='usuarios')),

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'contas',
 
     'widget_tweaks',
+    'rolepermissions',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -87,8 +88,11 @@ WSGI_APPLICATION = 'amadeus.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'amadeus',
+        'USER': 'amadeus',
+        'PASSWORD': 'amadeus',
+        'HOST': '127.0.0.1',
     }
 }
 
@@ -145,3 +149,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'contas.backends.ModelBackend',
 ]
+
+ROLEPERMISSIONS_MODULE = 'amadeus.roles'
+CSRF_FAILURE_VIEW = 'error403'

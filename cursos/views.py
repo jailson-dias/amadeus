@@ -1,10 +1,10 @@
 # coding=utf-8
 
 from django.shortcuts import render,get_object_or_404
+from django.http import Http404
+from django.core.paginator import Paginator,EmptyPage
 from django.views import generic
-from django.core.paginator import Paginator, EmptyPage
 from django.views.generic import base, edit,detail
-from django import forms
 from django.core.urlresolvers import reverse
 
 from .models import Categoria,Aluno
@@ -28,6 +28,25 @@ class Curso(edit.UpdateView):
     template_name = "cursos/curso.html"
     def get_success_url(self):
         return reverse('cursos:curso', kwargs={"slug":self.kwargs['slug']})
+
+    def get_context_data(self, **kwargs):
+        context = super(Curso, self).get_context_data(**kwargs)
+        modulos = self.object.modulos.filter(is_visivel=True)
+        # print (dir(self.object.mo))
+        paginator = Paginator(modulos, 2)
+        try:
+            page_number = int(self.request.GET.get('page', 1))
+        except ValueError:
+            raise Http404
+        try:
+            page_obj = paginator.page(page_number)
+        except EmptyPage:
+            raise Http404
+
+        context['paginator'] = paginator
+        context['page_obj'] = page_obj
+        context['modulos'] = page_obj.object_list
+        return context
 
     def form_valid(self, form):
         context = super(Curso, self).form_valid(form)

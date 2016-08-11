@@ -120,106 +120,19 @@
 						</div>
 					</div>
 					{% endfor %}
+					<nav aria-label="Page navigation">
+					  <ul class="pagination">
+					    {% for page_number in paginator.page_range %}
+					    <li{% if page_obj.number == page_number %} class="active"{% endif %}>
+					        <a href="?page={{ page_number }}">{{ page_number }}</a>
+					    </li>
+					    {% endfor %}
+					  </ul>
+					</nav>
 					{% endblock %}
 				</div>
-
-				<!-- <div class="modal fade" id="text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-body">
-								<div class="row sem-margin">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								</div>
-								<div class="row">
-									<h2 class="col-md-12 text-justify sem-margin">{{curso.curso}}</h2>
-								</div>
-								<hr>
-								<div class="row">
-									<h3 class="col-md-12 text-justify sem-margin">Instrutor: {{curso.professor}}</h3>
-								</div>
-								<div class="row">
-									<h4 class="col-md-12 text-justify">Inicio: {{curso.data_inicio|date:'d/m/y'|default:'não definida'}}</h4>
-								</div>
-								<div class="row">
-									<h4 class="col-md-12 text-justify sem-margin">Término: {{curso.data_fim}}</h4>
-								</div>
-
-								<div class="row margin-h4">
-									<p class="col-md-12 text-justify">{{curso.descricao}}</p>
-								</div>
-								<div class="row sem-margin">
-				      				<button type="button" class="h2 btn btn-primary pull-right" data-dismiss="modal">Close</button>
-				      			</div>
-							</div>
-						</div>
-					</div>
-				</div> -->
 			</div>
 		</div>
-		<!-- <div class="row">
-			<div class="col-md-2">
-			</div>
-			<div class="col-md-8">
-				<div class="jumbotron">
-					<div class="row sem-margin">
-						<div class="col-md-3" data-toggle="modal" data-target="#text">
-							<a href="#"><img class="img-responsive padding-5" src="static/foto.png" alt="foto do curso"></img></a>
-						</div>
-						<div class="col-md-9">
-							<div class="row sem-margin">
-								<div class="row sem-margin">
-									<div class="col-md-12">
-										<a href="#"><h2 class="sem-margin" data-toggle="modal" data-target="#text">Django</h2></a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<p class="col-md-12 h4 text-justify"> ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <a href="#"  data-toggle="modal" data-target="#text">Learn more</a></p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="modal fade" id="text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-body">
-								<div class="row sem-margin">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								</div>
-								<div class="row">
-									<h2 class="col-md-12 text-justify sem-margin">Django</h2>
-								</div>
-								<hr>
-								<div class="row">
-									<h3 class="col-md-12 text-justify sem-margin">Instrutor: Jailson Dias</h3>
-								</div>
-								<div class="row">
-									<h4 class="col-md-12 text-justify">Inicio: 18 de julho de 2016</h4>
-								</div>
-								<div class="row">
-									<h4 class="col-md-12 text-justify sem-margin">Término: 30 de julho de 2016</h4>
-								</div>
-
-								<div class="row margin-h4">
-									<p class="col-md-12 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-									quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-									consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-									cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-								</div>
-								<div class="row sem-margin">
-				      				<button type="button" class="h2 btn btn-primary pull-right" data-dismiss="modal">Close</button>
-				      			</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
 	</div>
 
 

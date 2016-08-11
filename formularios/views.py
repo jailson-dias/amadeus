@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .formularios import Categoria, Curso, Aluno,Modulo,Add_aluno_curso, Material, Atividade
 from django.db import IntegrityError
-from rolepermissions.decorators import has_role_decorator
+from rolepermissions.decorators import has_role_decorator,has_permission_decorator
+# from rolepermissions.verifications import has_permission
 
 def categoria_f(request):
     context = {}
@@ -14,7 +15,7 @@ def categoria_f(request):
     context['categoria'] = categoria
     return render(request,"formularios/categoria.html",context)
 
-@has_role_decorator('professor')
+@has_permission_decorator('criar_cursos')
 def curso_f(request):
     context = {}
     curso = Curso(request.POST or None,request.FILES or None)

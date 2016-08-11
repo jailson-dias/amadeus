@@ -5,20 +5,20 @@
 {% load widget_tweaks %}
 
 {% block titulo %}
-<title>{{curso.curso}}</title>
+<title>{{object.curso}}</title>
 {% endblock%}
 
 {% block conteudo%}
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-		<h1>{{curso}}</h1>
+		<h1>{{object}}</h1>
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<!--{# imagem do curso#}-->
-		{% if curso.imagem %}
-		<img class="img-responsive" src="{{curso.imagem.url}}" alt="imagem do curso" />
+		{% if object.imagem %}
+		<img class="img-responsive" src="{{object.imagem.url}}" alt="imagem do curso" />
 		{% else %}
 		<img class="img-responsive" src="{% static 'imagens/foto.png'%}" alt="sem foto" />
 		{% endif %}
@@ -28,13 +28,13 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<p>
-			{{curso.descricao|linebreaks}}
+			{{object.descricao|linebreaks}}
 		</p>
 	</div>
 </div>
 
 	{# modulos do curso#}
-	{% for modulo in curso.modulos.all %}
+	{% for modulo in object.modulos.all %}
 	{% if modulo.is_visivel %}
 		<div class="row modulo">
 			<div class="col-md-12">
@@ -75,15 +75,24 @@
 		</div>
 {% endif %}
 {% endfor %}
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		{% for page_number in paginator.page_range %}
+		<li{% if page_obj.number == page_number %} class="active"{% endif %}>
+				<a href="?page={{ page_number }}">{{ page_number }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+</nav>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-		<h3>Categoria: <a href="{% url 'cursos:categoria' curso.categoria.slug %}">{{curso.categoria}}</a></h3>
+		<h3>Categoria: <a href="{% url 'cursos:categoria' object.categoria.slug %}">{{object.categoria}}</a></h3>
 	</div>
 </div>
 <!-- Input de visivel ou invisivel para o curso-->
 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
-	{% for field in update %}
+	{% for field in form %}
 		<div class="form-group{% if field.errors %} has-error{% endif %}">
 				<label for="{{ field.auto_id }}" class="col-sm-2 control-label">{{ field.label }}</label>
 				<div class="col-sm-10">
@@ -106,7 +115,7 @@
 		<h1>Alunos</h1>
 	</div>
 </div>
-{% for aluno in curso.alunos.all %}
+{% for aluno in object.alunos.all %}
 <div class="row margin-h4">
 	<div class="col-md-3">
 		<a href="{% url 'cursos:aluno' aluno.slug%}">

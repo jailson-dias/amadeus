@@ -1,7 +1,8 @@
 {% extends "cursos/base.html" %}
 {% load widget_tweaks %}
 {% block titulo %}
-<title>Criar Curso</title>
+{% load i18n%}
+<title>{% trans 'Create Course'%}</title>
 {% endblock titulo %}
 {% block conteudo %}
 <div class="row">
@@ -22,7 +23,7 @@
 
           <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary">{% trans 'Send'%}</button>
               </div>
           </div>
       </form>

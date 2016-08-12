@@ -38,13 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'widget_tweaks',
+    'rolepermissions',
+
     'cursos',
     'formularios',
     'autoslug',
     'contas',
 
-    'widget_tweaks',
-    'rolepermissions',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,6 +57,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'amadeus.urls'
@@ -119,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'America/Recife'
 
@@ -151,4 +153,3 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 ROLEPERMISSIONS_MODULE = 'amadeus.roles'
-CSRF_FAILURE_VIEW = 'error403'

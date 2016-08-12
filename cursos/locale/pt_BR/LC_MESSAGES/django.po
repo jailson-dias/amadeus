@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-12 00:10-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: cursos/models.py:8 cursos/models.py:22 cursos/models.py:34
+#: cursos/models.py:58 cursos/models.py:72 cursos/models.py:85
+msgid "Name"
+msgstr "Nome"
+
+#: cursos/models.py:9 cursos/templates/cursos/aluno.html:12
+#: cursos/templates/cursos/curso.html:137
+msgid "E-mail"
+msgstr "E-mail"
+
+#: cursos/models.py:11 cursos/templates/cursos/aluno.html:17
+#: cursos/templates/cursos/curso.html:142
+msgid "Telephone"
+msgstr "Telefone"
+
+#: cursos/models.py:12 cursos/models.py:44
+msgid "Image"
+msgstr "Imagem"
+
+#: cursos/models.py:18 cursos/templates/cursos/base.html:37
+msgid "Student"
+msgstr "Estudante"
+
+#: cursos/models.py:19 cursos/models.py:42
+#: cursos/templates/cursos/curso.html:115
+msgid "Students"
+msgstr "Estudantes"
+
+#: cursos/models.py:27 cursos/models.py:43 cursos/templates/cursos/base.html:35
+#: cursos/templates/cursos/curso.html:89
+msgid "Category"
+msgstr "Categoria"
+
+#: cursos/models.py:28 cursos/templates/cursos/base.html:46
+msgid "Categories"
+msgstr "Categorias"
+
+#: cursos/models.py:35
+msgid "Professor"
+msgstr "Professor"
+
+#: cursos/models.py:36
+msgid "Begin"
+msgstr "Início"
+
+#: cursos/models.py:37
+msgid "End"
+msgstr "Fim"
+
+#: cursos/models.py:39 cursos/models.py:60
+msgid "Description"
+msgstr "Descrição"
+
+#: cursos/models.py:40
+msgid "About"
+msgstr "Sobre"
+
+#: cursos/models.py:41
+msgid "Approved"
+msgstr "Aprovado"
+
+#: cursos/models.py:47 cursos/models.py:62 cursos/templates/cursos/base.html:8
+#: cursos/templates/cursos/base.html:36
+msgid "Course"
+msgstr "Curso"
+
+#: cursos/models.py:48
+msgid "Courses"
+msgstr "Cursos"
+
+#: cursos/models.py:61
+msgid "Visible"
+msgstr "Visivel"
+
+#: cursos/models.py:65 cursos/models.py:74 cursos/models.py:87
+#: cursos/templates/cursos/base.html:38
+msgid "Module"
+msgstr "Modulo"
+
+#: cursos/models.py:66
+msgid "Modules"
+msgstr "Modulos"
+
+#: cursos/models.py:75 cursos/models.py:88
+msgid "Type"
+msgstr "Tipo"
+
+#: cursos/models.py:78
+msgid "Material"
+msgstr "Material"
+
+#: cursos/models.py:79
+msgid "Materials"
+msgstr "Materiais"
+
+#: cursos/models.py:91
+msgid "Activity"
+msgstr "Atividade"
+
+#: cursos/models.py:92
+msgid "Activities"
+msgstr "Atividades"
+
+#: cursos/templates/cursos/aluno.html:33
+msgid "Ongoing courses"
+msgstr "Cursos em andamento"
+
+#: cursos/templates/cursos/aluno.html:63
+msgid "You don't have ongoing courses"
+msgstr "Você não tem cursos em andamento"
+
+#: cursos/templates/cursos/base.html:25
+msgid "Home"
+msgstr "Inicio"
+
+#: cursos/templates/cursos/base.html:32
+msgid "Create"
+msgstr "Criar"
+
+#: cursos/templates/cursos/base.html:39
+msgid "Add Student"
+msgstr "Adcionar Estudante"
+
+#: cursos/templates/cursos/base.html:40
+msgid "Add Material"
+msgstr "Adcionar Material"
+
+#: cursos/templates/cursos/base.html:41
+msgid "Add Activity"
+msgstr "Adcionar Atividade"
+
+#: cursos/templates/cursos/base.html:81
+msgid "Logout"
+msgstr "Sair"
+
+#: cursos/templates/cursos/base.html:83
+msgid "Sign in"
+msgstr "Entrar"
+
+#: cursos/templates/cursos/base.html:84
+msgid "Create Student"
+msgstr "Criar Estudante"
+
+#: cursos/templates/cursos/base.html:85
+msgid "Create Professor"
+msgstr "Criar Professor"
+
+#: cursos/templates/cursos/curso.html:108
+msgid "Update"
+msgstr "Atualizar"

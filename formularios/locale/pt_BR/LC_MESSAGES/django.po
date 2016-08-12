@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-12 00:10-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: formularios/templates/formularios/aluno.html:6
+msgid "Create Student"
+msgstr "Criar Estudante"
+
+#: formularios/templates/formularios/aluno.html:27
+#: formularios/templates/formularios/aluno_curso.html:25
+#: formularios/templates/formularios/categoria.html:24
+#: formularios/templates/formularios/curso.html:26
+#: formularios/templates/formularios/modulo.html:24
+msgid "Send"
+msgstr "Enviar"
+
+#: formularios/templates/formularios/aluno_curso.html:5
+msgid "Add Student"
+msgstr "Adicionar Estudante"
+
+#: formularios/templates/formularios/categoria.html:4
+msgid "Create Category"
+msgstr "Criar Categoria"
+
+#: formularios/templates/formularios/curso.html:5
+msgid "Create Course"
+msgstr "Criar Curso"
+
+#: formularios/templates/formularios/modulo.html:4
+msgid "Create Modules"
+msgstr "Criar Modulos"

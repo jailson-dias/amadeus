@@ -1,6 +1,6 @@
 
 {% extends "cursos/base.html" %}
-
+{% load i18n%}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -86,7 +86,7 @@
 </nav>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-		<h3>Categoria: <a href="{% url 'cursos:categoria' object.categoria.slug %}">{{object.categoria}}</a></h3>
+		<h3>{% trans 'Category'%}: <a href="{% url 'cursos:categoria' object.categoria.slug %}">{{object.categoria}}</a></h3>
 	</div>
 </div>
 <!-- Input de visivel ou invisivel para o curso-->
@@ -105,14 +105,14 @@
 	{% endfor %}
 	<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary">Atualizar</button>
+				<button type="submit" class="btn btn-primary">{% trans 'Update'%}</button>
 			</div>
 	</div>
 </form>
 <!--{# alunos do curso#}-->
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
-		<h1>Alunos</h1>
+		<h1>{% trans 'Students'%}</h1>
 	</div>
 </div>
 {% for aluno in object.alunos.all %}
@@ -134,12 +134,12 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<h4>E-mail:{{aluno.email}}</h4>
+				<h4>{% trans 'E-mail'%}:{{aluno.email}}</h4>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<h4>Telefone:{{aluno.telefone}}</h4>
+				<h4>{% trans 'Telephone'%}:{{aluno.telefone}}</h4>
 			</div>
 		</div>
 	</div>

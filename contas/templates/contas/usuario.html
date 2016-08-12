@@ -1,9 +1,9 @@
 {% extends "cursos/base.html" %}
-
+{% load i18n%}
 {% load widget_tweaks %}
 
 {% block titulo %}
-<title>Criar Conta</title>
+<title>{% trans 'Create account'%}</title>
 {% endblock titulo %}
 
 {% block conteudo %}
@@ -11,7 +11,7 @@
   <div class="col-md-8 col-md-offset-2">
     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
           {% csrf_token %}
-          {% for field in usuario %}
+          {% for field in form %}
           <div class="form-group{% if field.errors %} has-error{% endif %}">
               <label for="{{ field.auto_id }}" class="col-sm-2 control-label">{{ field.label }}</label>
               <div class="col-sm-10">
@@ -24,7 +24,7 @@
           {% endfor %}
           <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary">{% trans 'Send'%}</button>
               </div>
           </div>
       </form>

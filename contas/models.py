@@ -4,25 +4,23 @@ from django.db import models
 from django.core import validators
 from django.contrib.auth.models import UserManager, PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
-
+from django.utils.translation import ugettext_lazy as _
 
 class User(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(
-        'Usuário', max_length=30, unique=True, validators=[
+        _('User'), max_length=30, unique=True, validators=[
             validators.RegexValidator(
                 re.compile('^[\w.@+-]+$'),
-                'Informe um nome de usuário válido. '
-                'Este valor deve conter apenas letras, números '
-                'e os caracteres: @/./+/-/_ .'
-                , 'invalid'
+                _('Enter a user name. This value should contain only letters, numbers and the characters: @/./+/-/_ .')
+                ,'invalid'
             )
-        ], help_text='Um nome curto que será usado para identificá-lo de forma única na plataforma'
+        ], help_text=_('A short name that will be used to identify you a unique way on the platform')
     )
-    name = models.CharField('Nome', max_length=100, blank=True)
-    email = models.EmailField('E-mail', unique=True)
-    cpf = models.CharField('CPF', max_length=100, blank=True)
-    cidade = models.CharField('Cidade', max_length=100, blank=True)
+    name = models.CharField(_('Name'), max_length=100, blank=True)
+    email = models.EmailField(_('E-mail'), unique=True)
+    cpf = models.CharField(_('CPF'), max_length=100, blank=True)
+    cidade = models.CharField(_('City'), max_length=100, blank=True)
     ESTADOS = (
 		("1","Acre"),
 		("2","Alagoas"),
@@ -52,12 +50,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 		("26","São Paulo"),
 		("27","Tocantins")
     	)
-    estado = models.CharField('Estado', choices=ESTADOS,max_length=100)
-    telefone = models.CharField('Telefone', max_length=100, blank=True)
-    is_staff = models.BooleanField('Admin', default=False)
-    is_professor = models.BooleanField('Professor', default=False)
-    data_entrou = models.DateTimeField('Data de Entrada', auto_now_add=True)
-    data_atualizou = models.DateTimeField('Data de Última Atualização', auto_now=True)
+    estado = models.CharField(_('State'), choices=ESTADOS,max_length=100)
+    telefone = models.CharField(_('Telephone'), max_length=100, blank=True)
+    is_staff = models.BooleanField(_('Admin'), default=False)
+    is_professor = models.BooleanField(_('Professor'), default=False)
+    data_entrou = models.DateTimeField(_('Entry date'), auto_now_add=True)
+    data_atualizou = models.DateTimeField(_('Date of last update'), auto_now=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
@@ -65,8 +63,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     class Meta:
-        verbose_name = 'Usuário'
-        verbose_name_plural = 'Usuários'
+        verbose_name = _('User')
+        verbose_name_plural = _('Users')
 
     def __str__(self):
         return self.name or self.username

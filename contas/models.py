@@ -2,6 +2,7 @@ import re
 
 from django.db import models
 from django.core import validators
+from autoslug.fields import AutoSlugField
 from django.contrib.auth.models import UserManager, PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
@@ -19,6 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     name = models.CharField(_('Name'), max_length=100, blank=True)
     email = models.EmailField(_('E-mail'), unique=True)
+    slug = AutoSlugField(populate_from='username',unique=True)
     cpf = models.CharField(_('CPF'), max_length=100, blank=True)
     cidade = models.CharField(_('City'), max_length=100, blank=True)
     ESTADOS = (
@@ -52,6 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     	)
     estado = models.CharField(_('State'), choices=ESTADOS,max_length=100)
     telefone = models.CharField(_('Telephone'), max_length=100, blank=True)
+    imagem = models.ImageField(upload_to='alunos/imagens',verbose_name=_('Image'), null=True,blank=True)
     is_staff = models.BooleanField(_('Admin'), default=False)
     is_professor = models.BooleanField(_('Professor'), default=False)
     data_entrou = models.DateTimeField(_('Entry date'), auto_now_add=True)

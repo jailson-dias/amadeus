@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from django.contrib import admin
-from .models import Curso, Aluno, Categoria,Modulo,Atividade,Material
+from .models import Curso, Categoria,Modulo,Atividade,Material,Aluno_curso
 
 class CategoriasAdmin(admin.ModelAdmin):
 
@@ -15,10 +15,10 @@ class CursosAdmin(admin.ModelAdmin):
     search_fields = ['curso', 'slug']
     # prepopulated_fields = {'slug': ('curso','categoria','data_inicio','professor')}
 
-class AlunosAdmin(admin.ModelAdmin):
-
-    list_display = ['nome', 'slug', 'email', 'telefone']
-    search_fields = ['nome', 'slug']
+# class AlunosAdmin(admin.ModelAdmin):
+#
+#     list_display = ['nome', 'slug', 'email', 'telefone']
+#     search_fields = ['nome', 'slug']
     # prepopulated_fields = {'slug': ('nome','email')}
 
 class ModulosAdmin(admin.ModelAdmin):
@@ -40,8 +40,9 @@ class MaterialAdmin(admin.ModelAdmin):
     # prepopulated_fields = {'slug': ('nome','tipo')}
 
 admin.site.register(Curso,CursosAdmin)
-admin.site.register(Aluno,AlunosAdmin)
+# admin.site.register(Aluno,AlunosAdmin)
 admin.site.register(Categoria,CategoriasAdmin)
 admin.site.register(Modulo,ModulosAdmin)
 admin.site.register(Atividade,AtividadeAdmin)
 admin.site.register(Material,MaterialAdmin)
+admin.site.register(Aluno_curso)

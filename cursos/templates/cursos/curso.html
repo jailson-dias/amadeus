@@ -1,8 +1,7 @@
 
 {% extends "cursos/base.html" %}
-{% load i18n%}
-{% load static %}
-{% load widget_tweaks %}
+
+{% load widget_tweaks i18n static permission_tags%}
 
 {% block titulo %}
 <title>{{object.curso}}</title>
@@ -27,6 +26,12 @@
 </div>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
+		<h3>{% trans 'Category'%}: <a href="{% url 'cursos:categoria' object.categoria.slug %}">{{object.categoria}}</a></h3>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h3>Descrição: </h3>
 		<p>
 			{{object.descricao|linebreaks}}
 		</p>
@@ -84,43 +89,39 @@
 		{% endfor %}
 	</ul>
 </nav>
-<div class="row">
-	<div class="col-md-6 col-md-offset-3">
-		<h3>{% trans 'Category'%}: <a href="{% url 'cursos:categoria' object.categoria.slug %}">{{object.categoria}}</a></h3>
-	</div>
-</div>
-<!-- Input de visivel ou invisivel para o curso-->
+{% if user.is_authenticated %}
 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
-	{% for field in form %}
-		<div class="form-group{% if field.errors %} has-error{% endif %}">
-				<label for="{{ field.auto_id }}" class="col-sm-2 control-label">{{ field.label }}</label>
-				<div class="col-sm-10">
-					{% render_field field class='form-control' %}
-					{% for error in field.errors %}
-					<span class="help-block">{{ error }}</span>
-					{% endfor %}
-				</div>
-		</div>
-	{% endfor %}
+
+	{% if user|has_role:"professor" %}
+	{% include "cursos/form.html" %}
 	<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary">{% trans 'Update'%}</button>
+				<button name="professor" type="submit" class="btn btn-primary">{% trans 'Update'%}</button>
 			</div>
 	</div>
+	{% elif user|has_role:'aluno' and not cadastrado%}
+	<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button name="aluno" type="submit" class="btn btn-primary">{% trans 'Join'%}</button>
+			</div>
+	</div>
+	{% endif %}
 </form>
+{% endif %}
+{% if user|has_role:"professor" %}
 <!--{# alunos do curso#}-->
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<h1>{% trans 'Students'%}</h1>
 	</div>
 </div>
-{% for aluno in object.alunos.all %}
+{% for aluno in alunos %}
 <div class="row margin-h4">
 	<div class="col-md-3">
 		<a href="{% url 'cursos:aluno' aluno.slug%}">
 		{% if aluno.imagem %}
-		<img class="img-responsive" src="{{aluno.imagem.url}}" alt="foto de {{aluno.nome}}" />
+		<img class="img-responsive" src="{{aluno.imagem.url}}" alt="foto de {{aluno.name}}" />
 		{% else %}
 		<img class="img-responsive" src="{% static 'imagens/foto.png'%}" alt="sem foto" />
 		{% endif %}
@@ -129,7 +130,7 @@
 	<div class="col-md-9">
 		<div class="row">
 				<div class="col-md-12">
-					<a href="{% url 'cursos:aluno' aluno.slug%}"><h2>{{aluno.nome}}</h2></a>
+					<a href="{% url 'cursos:aluno' aluno.slug%}"><h2>{{aluno.name}}</h2></a>
 				</div>
 		</div>
 		<div class="row">
@@ -145,4 +146,5 @@
 	</div>
 </div>
 {% endfor%}
+{% endif %}
 {% endblock %}

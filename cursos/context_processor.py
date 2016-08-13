@@ -1,4 +1,5 @@
-from .models import Categoria,Aluno,Curso
+from .models import Categoria,Curso
+from contas.models import User
 
 
 def categorias(request):
@@ -8,7 +9,7 @@ def categorias(request):
 
 def alunos(request):
     return {
-        'alunos_cp': Aluno.objects.all()
+        'alunos_cp': User.objects.all()
     }
 
 def cursos(request):

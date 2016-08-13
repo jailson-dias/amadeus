@@ -4,23 +4,24 @@ from django.db import models
 from autoslug.fields import AutoSlugField
 from django.utils.translation import ugettext_lazy as _
 
-class Aluno(models.Model):
-	nome = models.CharField(_('Name'),max_length=100)
-	email = models.EmailField(_('E-mail'),max_length=100)
-	slug = AutoSlugField(populate_from='nome',unique=True)
-	telefone = models.CharField(_('Telephone'),max_length=50)
-	imagem = models.ImageField(upload_to='alunos/imagens',verbose_name=_('Image'), null=True,blank=True)
+from contas.models import User
 
-	def __str__(self):
-		return self.nome
-
-	class Meta:
-		verbose_name = _('Student')
-		verbose_name_plural = _('Students')
+# class Aluno(models.Model):
+# 	nome = models.CharField(_('Name'),max_length=100)
+# 	email = models.EmailField(_('E-mail'),max_length=100)
+# 	slug = AutoSlugField(populate_from='nome',unique=True)
+# 	telefone = models.CharField(_('Telephone'),max_length=50)
+# 	imagem = models.ImageField(upload_to='alunos/imagens',verbose_name=_('Image'), null=True,blank=True)
+#
+# 	def __str__(self):
+# 		return self.nome
+#
+# 	class Meta:
+# 		verbose_name = _('Student')
+# 		verbose_name_plural = _('Students')
 
 class Categoria(models.Model):
 	nome = models.CharField(verbose_name=_('Name'),max_length=100, unique=True)
-	# slug = AutoSlugField(models.SlugField('Slug',max_length=100,unique=True))
 	slug = AutoSlugField(populate_from='nome',unique=True)
 
 	class Meta:
@@ -32,14 +33,14 @@ class Categoria(models.Model):
 
 class Curso(models.Model):
 	curso = models.CharField(_('Name'),max_length=100)
-	professor = models.CharField(_('Professor'),max_length=100)
+	# professor = models.CharField(_('Professor'),max_length=100)
 	data_inicio = models.DateField(_('Begin'))
 	data_fim = models.DateField(_('End'))
 	slug = AutoSlugField(populate_from='curso',unique=True)
 	descricao = models.TextField(_('Description'), blank=True)
 	sobre = models.TextField(_('About'), blank=True)
 	is_approved = models.BooleanField(_('Approved'), default=False, blank=True)
-	alunos = models.ManyToManyField(Aluno, verbose_name=_('Students'),through='Aluno_curso', blank=True)
+	# alunos = models.ManyToManyField(Aluno, verbose_name=_('Students'),through='Aluno_curso', blank=True)
 	categoria = models.ForeignKey(Categoria, verbose_name=_('Category'), related_name="cursos")
 	imagem = models.ImageField(upload_to='imagens/',verbose_name=_('Image'),null=True,blank=True)
 
@@ -51,8 +52,14 @@ class Curso(models.Model):
 		return self.curso
 
 class Aluno_curso(models.Model):
-    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(User, on_delete=models.CASCADE, related_name="alunos_curso")
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, related_name="cursos_aluno")
+	# data_entrou = models.DateTimeField(_('Entry date'), auto_now_add=True)
+
+class Professor_curso(models.Model):
+    aluno = models.ForeignKey(User, on_delete=models.CASCADE,related_name="professor_curso")
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE,related_name="cursos_professor")
+	# data_entrou = models.DateTimeField(_('Entry date'), auto_now_add=True)
 
 class Modulo(models.Model):
 	nome = models.CharField(_('Name'),max_length=100)

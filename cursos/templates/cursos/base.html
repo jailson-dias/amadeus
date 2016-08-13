@@ -34,9 +34,9 @@
 				    <ul class="dropdown-menu">
 								<li><a href="{% url 'criar:categoria'%}">{% trans 'Category'%}</a></li>
 								<li><a href="{% url 'criar:curso'%}">{% trans 'Course'%}</a></li>
-								<li><a href="{% url 'criar:aluno'%}">{% trans 'Student'%}</a></li>
+								{# <li><a href="{% url 'criar:aluno'%}">{% trans 'Student'%}</a></li>#}
 								<li><a href="{% url 'criar:modulo'%}">{% trans 'Module'%}</a></li>
-								<li><a href="{% url 'criar:add_aluno'%}">{% trans 'Add Student'%}</a></li>
+								{# <li><a href="{% url 'criar:add_aluno'%}">{% trans 'Add Student'%}</a></li>#}
 								<li><a href="{% url 'criar:add_material'%}">{% trans 'Add Material'%}</a></li>
 								<li><a href="{% url 'criar:add_atividade'%}">{% trans 'Add Activity'%}</a></li>
 				    </ul>
@@ -96,7 +96,12 @@
 			<div class="col-md-8">
 				<div class="jumbotron">
 					{% block conteudo%}
-					{% for curso in cursos %}
+					<div class="row sem-margin">
+						<div class="col-md-12">
+							<h3>Meus Cursos</h3>
+						</div>
+					</div>
+					{% for curso in meus_cursos %}
 					<div class="row sem-margin">
 						<div class="col-md-3" data-toggle="modal" data-target="#text">
 							{% if curso.imagem %}
@@ -129,6 +134,46 @@
 					    </li>
 					    {% endfor %}
 					  </ul>
+					</nav>
+
+					<div class="row sem-margin">
+						<div class="col-md-12">
+							<h3>Outros Cursos</h3>
+						</div>
+					</div>
+					{% for curso in outros_cursos %}
+					<div class="row sem-margin">
+						<div class="col-md-3" data-toggle="modal" data-target="#text">
+							{% if curso.imagem %}
+							<a href="{% url 'cursos:curso' curso.slug%}"><img class="img-responsive padding-5" src="{{ curso.imagem.url}}" alt="foto do curso"></img></a>
+							{% else %}
+							<a href="{% url 'cursos:curso' curso.slug%}"><img class="img-responsive padding-5" src="{% static 'imagens/foto.png'%}" alt="foto do curso"></img></a>
+							{% endif %}
+						</div>
+						<div class="col-md-9">
+							<div class="row sem-margin">
+								<div class="row sem-margin">
+									<div class="col-md-12">
+										<a href="{% url 'cursos:curso' curso.slug %}"><h2 class="sem-margin"  data-toggle="modal" data-target="#text">{{curso.curso}}</h2></a>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+											<p class="col-md-12 h4 text-justify"> {{curso.descricao}} <a href="{% url 'cursos:curso' curso.slug %}" >Learn more</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							{% for pagina_number in paginacao.page_range %}
+							<li{% if pagina_obj.number == pagina_number %} class="active"{% endif %}>
+									<a href="?page={{ pagina_number }}">{{ pagina_number }}</a>
+							</li>
+							{% endfor %}
+						</ul>
 					</nav>
 					{% endblock %}
 				</div>

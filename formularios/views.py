@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .formularios import Categoria, Curso, Aluno,Modulo,Add_aluno_curso, Material, Atividade
+from .formularios import Categoria, Curso,Modulo,Add_aluno_curso, Material, Atividade
 from django.db import IntegrityError
 from rolepermissions.decorators import has_role_decorator,has_permission_decorator
 # from rolepermissions.verifications import has_permission
@@ -26,15 +26,15 @@ def curso_f(request):
     context['curso'] = curso
     return render(request,"formularios/curso.html",context)
 
-def aluno_f(request):
-    context = {}
-    aluno = Aluno(request.POST or None, request.FILES or None)
-    if aluno.is_valid():
-        aluno.save()
-        context['sucesso'] = True
-        aluno = Aluno()
-    context['aluno'] = aluno
-    return render(request,"formularios/aluno.html",context)
+# def aluno_f(request):
+#     context = {}
+#     aluno = Aluno(request.POST or None, request.FILES or None)
+#     if aluno.is_valid():
+#         aluno.save()
+#         context['sucesso'] = True
+#         aluno = Aluno()
+#     context['aluno'] = aluno
+#     return render(request,"formularios/aluno.html",context)
 
 @has_role_decorator('professor')
 def modulo_f(request):
@@ -47,15 +47,15 @@ def modulo_f(request):
     context['modulo'] = modulo
     return render(request,"formularios/modulo.html",context)
 
-def aluno_curso(request):
-    context = {}
-    aluno = Add_aluno_curso(request.POST or None)
-    if aluno.is_valid():
-        aluno.save()
-        context['sucesso'] = True
-        aluno = Add_aluno_curso()
-    context['aluno'] = aluno
-    return render(request,"formularios/aluno_curso.html",context)
+# def aluno_curso(request):
+#     context = {}
+#     aluno = Add_aluno_curso(request.POST or None)
+#     if aluno.is_valid():
+#         aluno.save()
+#         context['sucesso'] = True
+#         aluno = Add_aluno_curso()
+#     context['aluno'] = aluno
+#     return render(request,"formularios/aluno_curso.html",context)
 
 def material_f(request):
     context = {}

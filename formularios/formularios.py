@@ -1,5 +1,5 @@
 from django import forms
-from cursos.models import Curso as C, Aluno as A, Categoria as Cat, Modulo as M, Aluno_curso, Material as Mat, Atividade as At
+from cursos.models import Curso as C, Categoria as Cat, Modulo as M, Aluno_curso, Material as Mat, Atividade as At
 
 class Categoria(forms.ModelForm):
     nome = forms.CharField(label='Categoria')
@@ -24,14 +24,14 @@ class Curso(forms.ModelForm):
 
     class Meta:
         model = C
-        fields = ['curso','professor','data_inicio','data_fim','descricao','sobre','is_approved','categoria','imagem']
+        fields = ['curso','data_inicio','data_fim','descricao','sobre','is_approved','categoria','imagem']
         # fields = '__all__'
 
-class Aluno(forms.ModelForm):
-
-    class Meta:
-        model = A
-        fields = '__all__'
+# class Aluno(forms.ModelForm):
+#
+#     class Meta:
+#         model = A
+#         fields = '__all__'
 
 class Modulo(forms.ModelForm):
 
